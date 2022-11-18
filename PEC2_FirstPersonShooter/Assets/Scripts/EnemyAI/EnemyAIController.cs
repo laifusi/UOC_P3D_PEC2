@@ -13,6 +13,7 @@ public class EnemyAIController : MonoBehaviour
     [SerializeField] float shootHeight = 0.5f;
     [SerializeField] Transform[] waypoints;
     [SerializeField] float life = 100;
+    [SerializeField] Transform botMesh;
 
     public Transform[] WayPoints => waypoints;
     public float TimeBetweenShoots => timeBetweenShoots;
@@ -27,13 +28,13 @@ public class EnemyAIController : MonoBehaviour
 
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
         PatrolState = new PatrolState(this);
         AlertState = new AlertState(this);
         AttackState = new AttackState(this);
 
         ChangeToState(PatrolState);
-
-        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
@@ -55,7 +56,8 @@ public class EnemyAIController : MonoBehaviour
 
     public void ChangeToState(IEnemyState state)
     {
-        currentState.ExitState();
+        if(currentState != null)
+            currentState.ExitState();
         currentState = state;
         currentState.EnterState();
     }
@@ -89,7 +91,8 @@ public class EnemyAIController : MonoBehaviour
     public bool CanSeePlayer()
     {
         RaycastHit hit;
-        if (Physics.Raycast(new Ray(new Vector3(transform.position.x, 0.5f, transform.position.z), transform.forward * 100f), out hit))
+        Debug.DrawRay(new Vector3(botMesh.position.x, botMesh.position.y, botMesh.position.z), botMesh.forward * 100f);
+        if (Physics.Raycast(new Ray(new Vector3(botMesh.position.x, botMesh.position.y, botMesh.position.z), botMesh.forward * 100f), out hit))
         {
             if (hit.collider.CompareTag("Player"))
             {
