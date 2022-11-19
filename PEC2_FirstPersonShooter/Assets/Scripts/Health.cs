@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,9 @@ public class Health : MonoBehaviour
 
     private float life;
     private float shield;
+
+    public static Action<float> OnShieldChange;
+    public static Action<float> OnHealthChange;
 
     private void Start()
     {
@@ -28,6 +32,9 @@ public class Health : MonoBehaviour
             shield -= damage * shieldPercentageProtection;
             life -= damage * (1 - shieldPercentageProtection);
         }
+
+        OnShieldChange?.Invoke(shield);
+        OnHealthChange?.Invoke(life);
 
         if(life <= 0)
         {
