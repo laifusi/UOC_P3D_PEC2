@@ -432,8 +432,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7794791, y: 0.22907686, z: 0.7760146}
-  m_Center: {x: 0, y: 0.00000021606684, z: -0.079070956}
+  m_Size: {x: 0.11910729, y: 0.14308254, z: 0.64856493}
+  m_Center: {x: 0, y: 0.033680376, z: -0.07907097}
 --- !u!1 &315669505796652911
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 315669505806159020}
   - component: {fileID: 4200758326560203320}
   - component: {fileID: 1502378636769492983}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EnemyDrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,8 +529,11 @@ MonoBehaviour:
   damageForce: 10
   rotationTime: 3
   shootHeight: 0.5
-  waypoints: []
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
   life: 100
+  botMesh: {fileID: 315669505796285261}
 --- !u!135 &1502378636769492983
 SphereCollider:
   m_ObjectHideFlags: 0

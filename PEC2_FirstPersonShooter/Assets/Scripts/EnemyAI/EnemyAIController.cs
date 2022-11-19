@@ -42,7 +42,7 @@ public class EnemyAIController : MonoBehaviour
         currentState.UpdateState();
     }
 
-    public void Hit(float damage)
+    public void GetHit(float damage)
     {
         life -= damage;
         currentState.GetHit();

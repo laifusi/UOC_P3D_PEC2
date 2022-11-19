@@ -29,6 +29,8 @@ public class Shooter : MonoBehaviour
                 totalDecals[currentDecal] = Instantiate(bulletHoleDecal, hit.point + hit.normal * 0.01f, Quaternion.FromToRotation(Vector3.forward, -hit.normal), hit.transform);
                 currentDecal = (currentDecal + 1) % maxBulletHoles;
                 audioSource.Play();
+
+                //ADD HITTING ENEMY
             }
         }
     }
