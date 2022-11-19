@@ -30,6 +30,8 @@ public class Health : MonoBehaviour
         else
         {
             shield -= damage * shieldPercentageProtection;
+            if (shield < 0)
+                shield = 0;
             life -= damage * (1 - shieldPercentageProtection);
         }
 
@@ -40,6 +42,22 @@ public class Health : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public void Heal(float healingValue)
+    {
+        life += healingValue;
+        if (life > 100)
+            life = 100;
+        OnHealthChange?.Invoke(life);
+    }
+
+    public void RepairShield(float repairValue)
+    {
+        shield += repairValue;
+        if (shield > 100)
+            shield = 100;
+        OnShieldChange?.Invoke(shield);
     }
 
     private void Die()

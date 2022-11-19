@@ -6,6 +6,7 @@ public class Door : MonoBehaviour
 {
     [SerializeField] DoorType type;
     Animator animator;
+    bool isOpen;
 
     private void Awake()
     {
@@ -14,20 +15,35 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        CharacterController character = other.GetComponent<CharacterController>();
+        if (isOpen)
+            return;
+
+        Debug.Log("Enter");
+        KeyHolder character = other.GetComponent<KeyHolder>();
         if (character != null)
         {
-            if(type == DoorType.KeyLess /*|| Check if character has key*/)
-            animator.SetTrigger("Switch");
+            if(type == DoorType.KeyLess || character.HasType(type))
+            {
+                animator.SetTrigger("Switch");
+                isOpen = true;
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        CharacterController character = other.GetComponent<CharacterController>();
+        if (!isOpen)
+            return;
+
+        Debug.Log("Exit");
+        KeyHolder character = other.GetComponent<KeyHolder>();
         if (character != null)
         {
-            animator.SetTrigger("Switch");
+            if (type == DoorType.KeyLess || character.HasType(type))
+            {
+                animator.SetTrigger("Switch");
+                isOpen = false;
+            }
         }
     }
 }
