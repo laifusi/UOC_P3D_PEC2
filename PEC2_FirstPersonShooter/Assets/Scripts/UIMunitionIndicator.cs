@@ -9,7 +9,7 @@ public class UIMunitionIndicator : MonoBehaviour
 
     private void Start()
     {
-        Shooter.OnGunShot += UpdateBullets;
+        Shooter.OnAmmoChange += UpdateBullets;
     }
 
     private void UpdateBullets(MunitionType typeShot, int totalBullets)

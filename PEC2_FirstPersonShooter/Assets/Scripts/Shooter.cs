@@ -16,7 +16,7 @@ public class Shooter : MonoBehaviour
     private int currentDecal = 0;
     private int amountOfMunition;
 
-    public static Action<MunitionType, int> OnGunShot;
+    public static Action<MunitionType, int> OnAmmoChange;
 
     private void Start()
     {
@@ -37,10 +37,18 @@ public class Shooter : MonoBehaviour
                 currentDecal = (currentDecal + 1) % maxBulletHoles;
                 audioSource.Play();
                 amountOfMunition--;
-                OnGunShot?.Invoke(typeOfGun, amountOfMunition);
+                OnAmmoChange?.Invoke(typeOfGun, amountOfMunition);
 
                 //ADD HITTING ENEMY
             }
         }
+    }
+
+    public void AddAmmo(int amount)
+    {
+        amountOfMunition += amount;
+        if (amountOfMunition > maxNumberOfBullets)
+            amountOfMunition = maxNumberOfBullets;
+        OnAmmoChange?.Invoke(typeOfGun, amountOfMunition);
     }
 }
