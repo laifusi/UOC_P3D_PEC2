@@ -5,9 +5,14 @@ using UnityEngine;
 public class Munition : Item
 {
     [SerializeField] int amountOfAmmo = 2;
+    [SerializeField] MunitionType type;
 
     protected override void PickUp(GameObject character)
     {
-        character.GetComponentInChildren<Shooter>(false).AddAmmo(amountOfAmmo);
+        Shooter[] guns = character.GetComponentsInChildren<Shooter>();
+        foreach (Shooter gun in guns)
+        {
+            gun.AddAmmo(type, amountOfAmmo);
+        }
     }
 }

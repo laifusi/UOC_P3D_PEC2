@@ -44,8 +44,11 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    public void AddAmmo(int amount)
+    public void AddAmmo(MunitionType typeOfAmmo, int amount)
     {
+        if (typeOfAmmo != typeOfGun)
+            return;
+
         amountOfMunition += amount;
         if (amountOfMunition > maxNumberOfBullets)
             amountOfMunition = maxNumberOfBullets;
