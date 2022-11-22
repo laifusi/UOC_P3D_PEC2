@@ -445,7 +445,9 @@ MonoBehaviour:
   gunsGO:
   - {fileID: 1672343586415662571}
   - {fileID: 2451405410145101227}
-  guns: []
+  guns:
+  - {fileID: 3663455994882961564}
+  - {fileID: 5559000990580965914}
 --- !u!1 &3536127542754108646
 GameObject:
   m_ObjectHideFlags: 0
