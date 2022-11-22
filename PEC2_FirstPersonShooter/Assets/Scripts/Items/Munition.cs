@@ -9,8 +9,8 @@ public class Munition : Item
 
     protected override void PickUp(GameObject character)
     {
-        Shooter[] guns = character.GetComponentsInChildren<Shooter>();
-        foreach (Shooter gun in guns)
+        Gun[] guns = character.GetComponentsInChildren<Gun>();
+        foreach (Gun gun in guns)
         {
             gun.AddAmmo(type, amountOfAmmo);
         }

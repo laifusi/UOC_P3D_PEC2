@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooter : MonoBehaviour
+public class Gun : MonoBehaviour
 {
     [SerializeField] GameObject bulletHoleDecal;
     [SerializeField] Camera cam;
@@ -15,8 +15,11 @@ public class Shooter : MonoBehaviour
     private GameObject[] totalDecals;
     private int currentDecal = 0;
     private int amountOfMunition;
+    private bool activeGun;
 
     public static Action<MunitionType, int> OnAmmoChange;
+
+    public MunitionType MunitionType => typeOfGun;
 
     private void Start()
     {
@@ -27,6 +30,9 @@ public class Shooter : MonoBehaviour
 
     private void Update()
     {
+        if (!activeGun)
+            return;
+
         if(amountOfMunition > 0 && Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -53,5 +59,10 @@ public class Shooter : MonoBehaviour
         if (amountOfMunition > maxNumberOfBullets)
             amountOfMunition = maxNumberOfBullets;
         OnAmmoChange?.Invoke(typeOfGun, amountOfMunition);
+    }
+
+    public void ActivateGun(bool isActive)
+    {
+        activeGun = isActive;
     }
 }

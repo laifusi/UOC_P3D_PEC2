@@ -6,10 +6,12 @@ public class UIMunitionIndicator : MonoBehaviour
 {
     [SerializeField] MunitionType type;
     [SerializeField] GameObject[] bullets;
+    [SerializeField] GameObject UIPanel;
 
     private void Start()
     {
-        Shooter.OnAmmoChange += UpdateBullets;
+        Gun.OnAmmoChange += UpdateBullets;
+        GunHolder.OnGunSwitch += ActivateIndicator;
     }
 
     private void UpdateBullets(MunitionType typeShot, int totalBullets)
@@ -20,6 +22,18 @@ public class UIMunitionIndicator : MonoBehaviour
             {
                 bullets[i].SetActive(i < totalBullets);
             }
+        }
+    }
+
+    private void ActivateIndicator(MunitionType typeActive)
+    {
+        if(typeActive == type)
+        {
+            UIPanel.SetActive(true);
+        }
+        else
+        {
+            UIPanel.SetActive(false);
         }
     }
 }
