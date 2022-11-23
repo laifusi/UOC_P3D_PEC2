@@ -15,6 +15,13 @@ public class EnemyAIController : MonoBehaviour
     [SerializeField] float life = 100;
     [SerializeField] Transform botMesh;
 
+    [Header("Materials")]
+    [SerializeField] private Material fullLifeMaterial;
+    [SerializeField] private Material halfLifeMaterial;
+    [SerializeField] private Material lowLifeMaterial;
+    [SerializeField] private Material fadeMaterial;
+    [SerializeField] private Renderer[] enemyRenderers;
+
     public Transform[] WayPoints => waypoints;
     public float TimeBetweenShoots => timeBetweenShoots;
     public float DamageForce => damageForce;
@@ -47,10 +54,40 @@ public class EnemyAIController : MonoBehaviour
         life -= damage;
         currentState.GetHit();
 
-
         if (life < 0)
         {
-            Destroy(gameObject);
+            StartCoroutine(FadeEnemy());
+        }
+        else if (life <= 25)
+        {
+            ChangeMaterial(lowLifeMaterial);
+        }
+        else if (life <= 50)
+        {
+            ChangeMaterial(halfLifeMaterial);
+        }
+    }
+
+    IEnumerator FadeEnemy()
+    {
+        ChangeMaterial(fadeMaterial);
+        Color originalColor = fadeMaterial.color;
+        Color c = fadeMaterial.color;
+        for (float alpha = 1f; alpha >= 0; alpha -= 0.1f)
+        {
+            c.a = alpha;
+            fadeMaterial.color = c;
+            yield return new WaitForSeconds(.1f);
+        }
+        fadeMaterial.color = originalColor;
+        Destroy(gameObject);
+    }
+
+    private void ChangeMaterial(Material material)
+    {
+        foreach (Renderer rend in enemyRenderers)
+        {
+            rend.material = material;
         }
     }
 
