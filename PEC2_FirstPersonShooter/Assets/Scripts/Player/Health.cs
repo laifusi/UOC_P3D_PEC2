@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Health : MonoBehaviour
 {
@@ -11,12 +12,21 @@ public class Health : MonoBehaviour
 
     private float life;
     private float shield;
+    private FirstPersonController fpsController;
+    private Collider collider;
 
     public static Action<float> OnShieldChange;
     public static Action<float> OnHealthChange;
+    public static Action OnDeath;
 
     private void Start()
     {
+        collider = GetComponent<Collider>();
+        collider.enabled = true;
+
+        fpsController = GetComponent<FirstPersonController>();
+        fpsController.enabled = true;
+
         life = maxLife;
         shield = maxShield;
     }
@@ -62,6 +72,9 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("DIE");
+        fpsController.SetLockCursor(false);
+        fpsController.enabled = false;
+        collider.enabled = false;
+        OnDeath?.Invoke();
     }
 }

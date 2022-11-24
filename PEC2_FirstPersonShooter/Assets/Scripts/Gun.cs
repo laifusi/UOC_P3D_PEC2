@@ -28,6 +28,13 @@ public class Gun : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         totalDecals = new GameObject[maxDecals];
         amountOfMunition = maxNumberOfBullets;
+
+        Health.OnDeath += BlockGameplay;
+    }
+
+    private void BlockGameplay()
+    {
+        activeGun = false;
     }
 
     private void Update()
