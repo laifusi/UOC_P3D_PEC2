@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,8 @@ public class EnemyAIController : MonoBehaviour
     public AlertState AlertState { get; private set; }
     public AttackState AttackState { get; private set; }
 
+    public Action<float> OnLifeChange;
+
     private IEnemyState currentState;
     private NavMeshAgent navMeshAgent;
 
@@ -52,9 +55,11 @@ public class EnemyAIController : MonoBehaviour
     public void GetHit(float damage)
     {
         life -= damage;
+        OnLifeChange?.Invoke(life);
+
         currentState.GetHit();
 
-        if (life < 0)
+        if (life <= 0)
         {
             StartCoroutine(FadeEnemy());
         }
