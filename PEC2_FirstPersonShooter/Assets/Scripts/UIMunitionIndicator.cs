@@ -36,6 +36,12 @@ public class UIMunitionIndicator : MonoBehaviour
             UIPanel.SetActive(false);
         }
     }
+
+    private void OnDestroy()
+    {
+        Gun.OnAmmoChange -= UpdateBullets;
+        GunHolder.OnGunSwitch -= ActivateIndicator;
+    }
 }
 
 public enum MunitionType
