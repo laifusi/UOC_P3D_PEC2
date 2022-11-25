@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameObject menuCanvas;
     [SerializeField] GameObject loseCanvas;
 
     private static GameManager instance;
@@ -28,6 +29,17 @@ public class GameManager : MonoBehaviour
 
     public void StartLevel()
     {
+        loseCanvas.SetActive(false);
+    }
+
+    public void Play()
+    {
+        menuCanvas.SetActive(false);
+    }
+
+    public void Menu()
+    {
+        menuCanvas.SetActive(true);
         loseCanvas.SetActive(false);
     }
 
