@@ -24,6 +24,7 @@ public class Door : MonoBehaviour
         {
             if(type == DoorType.KeyLess || character.HasType(type))
             {
+                Debug.Log("OPEN!");
                 animator.SetTrigger("Switch");
                 isOpen = true;
             }
@@ -41,6 +42,7 @@ public class Door : MonoBehaviour
         {
             if (type == DoorType.KeyLess || character.HasType(type))
             {
+                Debug.Log("Close!");
                 animator.SetTrigger("Switch");
                 isOpen = false;
             }

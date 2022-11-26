@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    private void Start()
+    {
+        LevelChangeDetector.OnEnteredLevelChangeDetector += ChangeToLevel;
+    }
+
     public void Menu()
     {
         SceneManager.LoadScene(0);
@@ -15,6 +20,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void ChangeToLevel(int level)
+    {
+        SceneManager.LoadScene(level);
+    }
+
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -23,5 +33,10 @@ public class MenuManager : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+    }
+
+    private void OnDestroy()
+    {
+        LevelChangeDetector.OnEnteredLevelChangeDetector -= ChangeToLevel;
     }
 }
