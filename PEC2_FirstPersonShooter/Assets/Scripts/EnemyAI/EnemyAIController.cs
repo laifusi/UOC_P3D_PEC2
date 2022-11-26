@@ -23,6 +23,10 @@ public class EnemyAIController : MonoBehaviour
     [SerializeField] private Material fadeMaterial;
     [SerializeField] private Renderer[] enemyRenderers;
 
+    [Header("Drops")]
+    [SerializeField] private GameObject[] droppableItems;
+    [SerializeField] private float probabilityOfDrop = 70;
+
     public Transform[] WayPoints => waypoints;
     public float TimeBetweenShoots => timeBetweenShoots;
     public float DamageForce => damageForce;
@@ -61,6 +65,12 @@ public class EnemyAIController : MonoBehaviour
 
         if (life <= 0)
         {
+            bool dropsItem = UnityEngine.Random.Range(0f, 100f) <= probabilityOfDrop;
+            if(dropsItem)
+            {
+                int randomId = UnityEngine.Random.Range(0, droppableItems.Length);
+                Instantiate(droppableItems[randomId], transform.position, Quaternion.identity);
+            }
             StartCoroutine(FadeEnemy());
         }
         else if (life <= 25)

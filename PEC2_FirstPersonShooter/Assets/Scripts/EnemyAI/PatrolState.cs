@@ -22,7 +22,10 @@ public class PatrolState : IEnemyState
     {
         if(enemyController.ReachedDestination())
         {
-            nextWayPoint = (nextWayPoint + 1) % enemyController.WayPoints.Length;
+            //nextWayPoint = (nextWayPoint + 1) % enemyController.WayPoints.Length;
+            nextWayPoint += 1;
+            if (nextWayPoint >= enemyController.WayPoints.Length)
+                nextWayPoint = 0;
             enemyController.SetDestination(enemyController.WayPoints[nextWayPoint]);
         }
     }

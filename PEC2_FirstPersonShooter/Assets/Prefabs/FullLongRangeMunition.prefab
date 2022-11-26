@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1298708293447142358}
   - component: {fileID: 1298708293447142359}
   m_Layer: 0
-  m_Name: LongRangeMunition
+  m_Name: FullLongRangeMunition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342b8e686ce6b524d8b6813c0bc229e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfAmmo: 2
+  amountOfAmmo: 5
   type: 1
 --- !u!1001 &1298708292238684059
 PrefabInstance:

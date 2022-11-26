@@ -2496,7 +2496,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!82 &2451405410830999894
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2798,7 +2798,8 @@ MonoBehaviour:
   cam: {fileID: 2451405410837396118}
   maxDecals: 10
   maxNumberOfBullets: 5
-  damageAmount: 50
+  initialAmountOfBullets: 0
+  damageAmount: 100
   typeOfGun: 1
   aimingPoint: {fileID: 0}
   distance: 15
@@ -2950,7 +2951,8 @@ MonoBehaviour:
   cam: {fileID: 2451405410837396118}
   maxDecals: 10
   maxNumberOfBullets: 5
-  damageAmount: 25
+  initialAmountOfBullets: 0
+  damageAmount: 50
   typeOfGun: 0
   aimingPoint: {fileID: 0}
   distance: 7.5

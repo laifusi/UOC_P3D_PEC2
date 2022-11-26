@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     [SerializeField] Camera cam;
     [SerializeField] int maxDecals = 10;
     [SerializeField] int maxNumberOfBullets = 5;
+    [SerializeField] int initialAmountOfBullets = 0;
     [SerializeField] int damageAmount = 25;
     [SerializeField] MunitionType typeOfGun;
     [SerializeField] Transform aimingPoint;
@@ -31,7 +32,8 @@ public class Gun : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         totalDecals = new GameObject[maxDecals];
-        amountOfMunition = maxNumberOfBullets;
+        amountOfMunition = initialAmountOfBullets;
+        OnAmmoChange?.Invoke(typeOfGun, amountOfMunition);
 
         Health.OnDeath += BlockGameplay;
     }

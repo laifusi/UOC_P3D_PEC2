@@ -419,6 +419,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyDrone
       objectReference: {fileID: 0}
+    - target: {fileID: 1502378636769492983, guid: b11d9f080cd47e84baa6447c13476b14, type: 3}
+      propertyPath: m_Radius
+      value: 8.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200758326560203320, guid: b11d9f080cd47e84baa6447c13476b14, type: 3}
+      propertyPath: damageForce
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4200758326560203320, guid: b11d9f080cd47e84baa6447c13476b14, type: 3}
       propertyPath: fadeMaterial
       value: 
@@ -444,9 +452,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6862144019458228225}
     - target: {fileID: 4200758326560203320, guid: b11d9f080cd47e84baa6447c13476b14, type: 3}
+      propertyPath: droppableItems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200758326560203320, guid: b11d9f080cd47e84baa6447c13476b14, type: 3}
       propertyPath: enemyRenderers.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4200758326560203320, guid: b11d9f080cd47e84baa6447c13476b14, type: 3}
+      propertyPath: droppableItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 2097508921471816600, guid: 33af14dd37abbf742bc2bf98bc82dfc5, type: 3}
+    - target: {fileID: 4200758326560203320, guid: b11d9f080cd47e84baa6447c13476b14, type: 3}
+      propertyPath: droppableItems.Array.data[1]
+      value: 
+      objectReference: {fileID: 2645274341032317902, guid: 48b071cf3d75e474a81539c18a3efa20, type: 3}
+    - target: {fileID: 4200758326560203320, guid: b11d9f080cd47e84baa6447c13476b14, type: 3}
+      propertyPath: droppableItems.Array.data[2]
+      value: 
+      objectReference: {fileID: 2097508921471816600, guid: 33af14dd37abbf742bc2bf98bc82dfc5, type: 3}
+    - target: {fileID: 4200758326560203320, guid: b11d9f080cd47e84baa6447c13476b14, type: 3}
+      propertyPath: droppableItems.Array.data[3]
+      value: 
+      objectReference: {fileID: 2645274341032317902, guid: 48b071cf3d75e474a81539c18a3efa20, type: 3}
     - target: {fileID: 4200758326560203320, guid: b11d9f080cd47e84baa6447c13476b14, type: 3}
       propertyPath: enemyRenderers.Array.data[0]
       value: 
