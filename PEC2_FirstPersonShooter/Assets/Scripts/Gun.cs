@@ -12,12 +12,16 @@ public class Gun : MonoBehaviour
     [SerializeField] int damageAmount = 25;
     [SerializeField] MunitionType typeOfGun;
     [SerializeField] Transform aimingPoint;
+    [SerializeField] float distance = 5;
+    [SerializeField] float timeBetweenShoots = 0.5f;
+    [SerializeField] GameObject aimingIndicator;
 
     private AudioSource audioSource;
     private GameObject[] totalDecals;
     private int currentDecal = 0;
     private int amountOfMunition;
     private bool activeGun;
+    private float nextTimeToShoot;
 
     public static Action<MunitionType, int> OnAmmoChange;
 
@@ -42,10 +46,12 @@ public class Gun : MonoBehaviour
         if (!activeGun)
             return;
 
+        aimingIndicator.SetActive(false);
         RaycastHit hit;
-        if (Physics.Raycast(cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit))
+        if (Physics.Raycast(cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit, distance))
         {
             EnemyAIController enemy = hit.collider.GetComponentInParent<EnemyAIController>();
+            aimingIndicator.SetActive(true);
             /*if(enemy != null)
             {
                 aimingPoint.gameObject.SetActive(true);
@@ -57,8 +63,9 @@ public class Gun : MonoBehaviour
                 aimingPoint.gameObject.SetActive(false);
             }*/
 
-            if (amountOfMunition > 0 && Input.GetMouseButtonDown(0))
+            if (amountOfMunition > 0 && Input.GetMouseButtonDown(0) && nextTimeToShoot < Time.time)
             {
+                nextTimeToShoot = Time.time + timeBetweenShoots;
                 audioSource.Play();
                 amountOfMunition--;
                 OnAmmoChange?.Invoke(typeOfGun, amountOfMunition);
