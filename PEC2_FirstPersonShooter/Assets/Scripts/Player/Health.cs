@@ -29,6 +29,8 @@ public class Health : MonoBehaviour
 
         life = maxLife;
         shield = maxShield;
+
+        GameWinner.OnGameWon += BlockCharacter;
     }
 
     public void GetHurt(float damage)
@@ -72,9 +74,19 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
+        BlockCharacter();
+        OnDeath?.Invoke();
+    }
+
+    private void BlockCharacter()
+    {
         fpsController.SetLockCursor(false);
         fpsController.enabled = false;
         collider.enabled = false;
-        OnDeath?.Invoke();
+    }
+
+    private void OnDestroy()
+    {
+        GameWinner.OnGameWon -= BlockCharacter;
     }
 }

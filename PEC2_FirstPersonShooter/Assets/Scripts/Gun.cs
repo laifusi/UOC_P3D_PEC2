@@ -36,6 +36,7 @@ public class Gun : MonoBehaviour
         OnAmmoChange?.Invoke(typeOfGun, amountOfMunition);
 
         Health.OnDeath += BlockGameplay;
+        GameWinner.OnGameWon += BlockGameplay;
     }
 
     private void BlockGameplay()

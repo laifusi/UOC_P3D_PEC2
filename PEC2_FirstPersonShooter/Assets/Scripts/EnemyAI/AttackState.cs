@@ -37,7 +37,7 @@ public class AttackState : IEnemyState
             currentTimeBetweenShoots = 0;
             //Hurt player
             if(enemyController != null)
-                col.gameObject.GetComponent<Health>().GetHurt(enemyController.DamageForce);
+                col.gameObject.GetComponent<Health>()?.GetHurt(enemyController.DamageForce);
         }
     }
 

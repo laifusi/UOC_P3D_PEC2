@@ -39,6 +39,7 @@ public class EnemyAIController : MonoBehaviour
 
     private IEnemyState currentState;
     private NavMeshAgent navMeshAgent;
+    private bool shouldntUpdate;
 
     void Start()
     {
@@ -53,6 +54,9 @@ public class EnemyAIController : MonoBehaviour
 
     void Update()
     {
+        if (shouldntUpdate)
+            return;
+
         currentState.UpdateState();
     }
 
@@ -86,6 +90,8 @@ public class EnemyAIController : MonoBehaviour
     IEnumerator FadeEnemy()
     {
         ChangeMaterial(fadeMaterial);
+        botMesh.GetComponent<Collider>().enabled = false;
+        shouldntUpdate = true;
         Color originalColor = fadeMaterial.color;
         Color c = fadeMaterial.color;
         for (float alpha = 1f; alpha >= 0; alpha -= 0.1f)
