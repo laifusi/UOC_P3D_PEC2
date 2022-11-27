@@ -52,5 +52,5 @@ public class Door : MonoBehaviour
 
 public enum DoorType
 {
-    KeyLess, KeyX, KeyY
+    KeyLess, RedKey, BlueKey, GreenKey, BlackKey
 }
