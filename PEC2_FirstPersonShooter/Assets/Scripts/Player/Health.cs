@@ -19,6 +19,9 @@ public class Health : MonoBehaviour
     public static Action<float> OnHealthChange;
     public static Action OnDeath;
 
+    /// <summary>
+    /// Start method to instantiate variables and listen for events
+    /// </summary>
     private void Start()
     {
         collider = GetComponent<Collider>();
@@ -33,6 +36,13 @@ public class Health : MonoBehaviour
         GameWinner.OnGameWon += BlockCharacter;
     }
 
+    /// <summary>
+    /// Method to get damaged
+    /// If there's no shield, we get full damage
+    /// If there's shield, we get a percentage of the damage
+    /// If life is 0 or lower, we die
+    /// </summary>
+    /// <param name="damage">Amount of damage received</param>
     public void GetHurt(float damage)
     {
         if(shield <= 0)
@@ -56,6 +66,10 @@ public class Health : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method to increase health
+    /// </summary>
+    /// <param name="healingValue">Amount of health increase</param>
     public void Heal(float healingValue)
     {
         life += healingValue;
@@ -64,6 +78,10 @@ public class Health : MonoBehaviour
         OnHealthChange?.Invoke(life);
     }
 
+    /// <summary>
+    /// Method to repair shield
+    /// </summary>
+    /// <param name="repairValue">Amount of repair</param>
     public void RepairShield(float repairValue)
     {
         shield += repairValue;
@@ -72,12 +90,18 @@ public class Health : MonoBehaviour
         OnShieldChange?.Invoke(shield);
     }
 
+    /// <summary>
+    /// Die method: We block the character and fire the death event
+    /// </summary>
     private void Die()
     {
         BlockCharacter();
         OnDeath?.Invoke();
     }
 
+    /// <summary>
+    /// If the player wins of loses, we unlock the cursor and deactivate the FPSController and collider
+    /// </summary>
     private void BlockCharacter()
     {
         fpsController.SetLockCursor(false);
@@ -85,6 +109,9 @@ public class Health : MonoBehaviour
         collider.enabled = false;
     }
 
+    /// <summary>
+    /// OnDestroy we stop listening to events
+    /// </summary>
     private void OnDestroy()
     {
         GameWinner.OnGameWon -= BlockCharacter;

@@ -12,6 +12,9 @@ public class GunHolder : MonoBehaviour
 
     public static Action<MunitionType> OnGunSwitch;
 
+    /// <summary>
+    /// Start method to deactivate all the guns and activate the first one
+    /// </summary>
     private void Start()
     {
         foreach (GameObject gun in gunsGO)
@@ -22,6 +25,9 @@ public class GunHolder : MonoBehaviour
         SwitchGun();
     }
 
+    /// <summary>
+    /// Update method to check if the player changes guns
+    /// </summary>
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.E))
@@ -30,6 +36,9 @@ public class GunHolder : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method to do the switch: we deactivate the current gun and activate the next one
+    /// </summary>
     public void SwitchGun()
     {
         gunsGO[currentGun].SetActive(false);

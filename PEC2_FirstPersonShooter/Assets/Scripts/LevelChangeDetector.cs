@@ -9,6 +9,10 @@ public class LevelChangeDetector : MonoBehaviour
 
     public static Action<int> OnEnteredLevelChangeDetector;
 
+    /// <summary>
+    /// If the player enters the trigger, we switch to the next level
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<Health>() != null)

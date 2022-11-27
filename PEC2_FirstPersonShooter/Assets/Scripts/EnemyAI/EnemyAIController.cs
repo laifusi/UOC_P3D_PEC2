@@ -6,7 +6,6 @@ using UnityEngine.AI;
 
 public class EnemyAIController : MonoBehaviour
 {
-
     [SerializeField] Light myLight;
     [SerializeField] float timeBetweenShoots = 1;
     [SerializeField] float damageForce = 10;
@@ -41,6 +40,9 @@ public class EnemyAIController : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private bool shouldntUpdate;
 
+    /// <summary>
+    /// Start method where we cache the NavMesAgent, create the states and initialize the first state
+    /// </summary>
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -52,6 +54,9 @@ public class EnemyAIController : MonoBehaviour
         ChangeToState(PatrolState);
     }
 
+    /// <summary>
+    /// Update method: if the enemy can update we call the state's UpdateState method
+    /// </summary>
     void Update()
     {
         if (shouldntUpdate)
@@ -60,6 +65,12 @@ public class EnemyAIController : MonoBehaviour
         currentState.UpdateState();
     }
 
+    /// <summary>
+    /// Method to receive damage: if it's lower than 0, the enemy fades out and might drop an item
+    /// If the life is under 25, we change its material to the lowLifeMaterial
+    /// If the life is under 50, we change its material to the halfLifeMaterial
+    /// </summary>
+    /// <param name="damage"></param>
     public void GetHit(float damage)
     {
         life -= damage;
@@ -87,6 +98,12 @@ public class EnemyAIController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Coroutine to fade the enemy out
+    /// We deactivate the collider and change the alpha of the fadeMaterial until it reaches 0
+    /// Then we destroy the object
+    /// </summary>
+    /// <returns></returns>
     IEnumerator FadeEnemy()
     {
         ChangeMaterial(fadeMaterial);
@@ -104,6 +121,10 @@ public class EnemyAIController : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Method to change the material of all Renderers of the enemy
+    /// </summary>
+    /// <param name="material"></param>
     private void ChangeMaterial(Material material)
     {
         foreach (Renderer rend in enemyRenderers)
@@ -112,6 +133,11 @@ public class EnemyAIController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method to change to a new state.
+    /// We call the ExitState method of the current one, change to the next and call its EnterState method.
+    /// </summary>
+    /// <param name="state"></param>
     public void ChangeToState(IEnemyState state)
     {
         if(currentState != null)
@@ -120,32 +146,54 @@ public class EnemyAIController : MonoBehaviour
         currentState.EnterState();
     }
 
+    /// <summary>
+    /// Method to change the colour of the spotlight
+    /// </summary>
+    /// <param name="color">Color to switch to</param>
     public void SwitchLightColor(Color color)
     {
         myLight.color = color;
     }
 
+    /// <summary>
+    /// Method to change the nav mesh agent's destination
+    /// </summary>
+    /// <param name="destination"></param>
     public void SetDestination(Transform destination)
     {
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(destination.position);
     }
 
+    /// <summary>
+    /// Method to check if the agent reached its destination
+    /// </summary>
+    /// <returns></returns>
     public bool ReachedDestination()
     {
         return navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance;
     }
 
+    /// <summary>
+    /// Method to pause the navmeshagent
+    /// </summary>
     public void StopNavMeshAgent()
     {
         navMeshAgent.isStopped = true;
     }
 
+    /// <summary>
+    /// Method to rotate the enemy
+    /// </summary>
     public void RotateEnemy()
     {
         transform.rotation *= Quaternion.Euler(0f, Time.deltaTime * 360 * 1.0f / rotationTime, 0f);
     }
 
+    /// <summary>
+    /// Method to check if the player is in sight
+    /// </summary>
+    /// <returns></returns>
     public bool CanSeePlayer()
     {
         RaycastHit hit;
@@ -160,16 +208,28 @@ public class EnemyAIController : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// OnTriggerEnter: calls the state's trigger
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         currentState.OnTriggerEnter(other);
     }
 
+    /// <summary>
+    /// OnTriggerStay: calls the state's trigger
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
         currentState.OnTriggerStay(other);
     }
 
+    /// <summary>
+    /// OnTriggerExit: calls the state's trigger
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         currentState.OnTriggerExit(other);

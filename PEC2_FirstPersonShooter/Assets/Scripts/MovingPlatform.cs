@@ -12,12 +12,18 @@ public class MovingPlatform : MonoBehaviour
     private int previousDestination;
     private float interpValue;
 
+    /// <summary>
+    /// Start method to instantiate the first destination
+    /// </summary>
     private void Start()
     {
         transform.position = positions[0].position;
         SwitchDestination();
     }
 
+    /// <summary>
+    /// Update method for position interpolation and checking if we reached the destination
+    /// </summary>
     private void Update()
     {
         if(automatic)
@@ -35,6 +41,9 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method to change to the next destination point
+    /// </summary>
     public void SwitchDestination()
     {
         previousDestination = currentDestination;

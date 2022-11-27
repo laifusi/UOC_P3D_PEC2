@@ -9,6 +9,9 @@ public class UIBarIndicator : MonoBehaviour
     private RectTransform rectTransform;
     private float maxWidth;
 
+    /// <summary>
+    /// Initialize variables and listen to the listener associated to the Indicator's type
+    /// </summary>
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -24,11 +27,18 @@ public class UIBarIndicator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update the bar indicator: change the sizeDelta of the rectTransform according to the current value and the maxWidth
+    /// </summary>
+    /// <param name="currentNumber"></param>
     private void UpdateIndicator(float currentNumber)
     {
         rectTransform.sizeDelta = new Vector2(currentNumber * maxWidth/100, rectTransform.sizeDelta.y);
     }
 
+    /// <summary>
+    /// Stop listening to events when destroyed
+    /// </summary>
     private void OnDestroy()
     {
         if (type == Indicator.Shield)
@@ -41,6 +51,9 @@ public class UIBarIndicator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Enum to define the types of Indicators
+    /// </summary>
     public enum Indicator
     {
         Health, Shield

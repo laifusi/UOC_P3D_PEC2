@@ -8,12 +8,21 @@ public class UIMunitionIndicator : MonoBehaviour
     [SerializeField] GameObject[] bullets;
     [SerializeField] GameObject UIPanel;
 
+    /// <summary>
+    /// Method to start listening for gun change events
+    /// </summary>
     private void Start()
     {
         Gun.OnAmmoChange += UpdateBullets;
         GunHolder.OnGunSwitch += ActivateIndicator;
     }
 
+    /// <summary>
+    /// Method to change the amount of bullets
+    /// If the type of munition is correct: activate the total number of bullets had and deactivate the ones used
+    /// </summary>
+    /// <param name="typeShot"></param>
+    /// <param name="totalBullets"></param>
     private void UpdateBullets(MunitionType typeShot, int totalBullets)
     {
         if(typeShot == type)
@@ -25,6 +34,10 @@ public class UIMunitionIndicator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// If the type of gun in hand corresponds to this Indicator, activate its Panel
+    /// </summary>
+    /// <param name="typeActive"></param>
     private void ActivateIndicator(MunitionType typeActive)
     {
         if(typeActive == type)
@@ -37,6 +50,9 @@ public class UIMunitionIndicator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// OnDestroy: stop listening to events
+    /// </summary>
     private void OnDestroy()
     {
         Gun.OnAmmoChange -= UpdateBullets;
@@ -44,6 +60,9 @@ public class UIMunitionIndicator : MonoBehaviour
     }
 }
 
+/// <summary>
+/// Enum for the type of Gun and Munition
+/// </summary>
 public enum MunitionType
 {
     Pistol, LongRangeGun
