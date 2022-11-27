@@ -1,92 +1,37 @@
 # PEC 2 - First Person Shooter
 
+## Cómo jugar
+Al iniciar el juego, después de seleccionar "Play" en el menú, el jugador se encuentra en un espacio montañoso rodeado de lava. En este primer nivel, deberá moverse por el espacio para llegar a las instalaciones del segundo nivel, protegidas por drones. Para protegerse de los drones, lleva dos tipos de arma, una de más largo alcance y más daño y otra de corto alcance y más lenta. Además, por el espacio encontrará tanto balas para estas armas como kits para recuperar vida y reparar su escudo.
 
+Cuando llegue a las instalaciones y atraviese la puerta, sin necesidad de llave, pasará al segundo nivel. Este se desarrolla dentro de las instalaciones y en él, además de encontrarse con más drones, el jugador deberá encontrar las llaves necesarias para pasar de una zona del espacio a otra. Cada puerta tiene una indicación de color que define qué llave tiene que haber encontrado el jugador para poder pasar por ella.
 
-## Getting started
+Para controlar al personaje, se tendrán que utilizar las teclas WASD para el movimiento y el espacio para el salto. Por otro lado, con la tecla E se podrá cambiar de arma y haciendo clic izquierdo con el ratón, se disparará.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Estructura e Implementación
+El juego se divide en tres escenas, el menú y los dos niveles.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Desde el menú, el jugador solo tiene la opción de jugar o de salir. Para estas funcionalidades, tenemos el script MenuManager, que se encargará de cualquier cambio de escena que haya que realizar en el juego, y que se mantendrá entre escenas al ser hijo del GameManager. Este, por su parte, sirve de conector entre varios elementos del juego y se encarga de activar o desactivar menús de UI cuando sea necesario.
 
-## Add your files
+En los niveles, podemos encontrar varios elementos a comentar: los enemigos, los items, las puertas y las funcionalidades del personaje.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Los enemigos funcionan mediante una máquina de estados definida por una interfaz que determina los métodos de cada estado, tres estados distintos - patrulla, alerta y ataque - y un controlador. Cada estado, se encarga de determinar qué debe hacer el enemigo, siendo relevantes los métodos UpdateState y OnTriggerEnter/Stay/Exit, que definirán cambios de estado y acciones a realizar. El enemigo patrullará por su ruta hasta que el jugador entre en su zona marcada por un trigger. En ese momento, pasará al estado de alerta, en el que dará una vuelta sobre si mismo. Si ve al jugador, pasará al modo de ataque, en el que, como su nombre indica, atacará al jugador hasta que salga de su línea de visión. Si no ve al jugador, volverá al estado de patrulla. Además, si el jugador lo ataca, pasará también al estado de ataque. El EnemyAIController será el encargado de hacer los cálculos y las acciones utilizadas por cada uno de los estados, además de almacenar varias características editables desde el editor que nos permitirán darles un poco de variedad a los enemigos, controlando, por ejemplo, el tiempo entre disparos, la velocidad de giro o la cantidad de daño que hace añ jugador.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/lfusterco/pec-2-first-person-shooter.git
-git branch -M main
-git push -uf origin main
-```
+Por su parte, los items heredarán todos de la clase Item. Esta contiene un método común para todos, OnTriggerEnter, y otro abstracto que cada hijo implementa como necesita, PickUp. El primero detecta cuando el jugador toca el objeto y se encarga de activar el sonido asociado al item, destruir el objeto y llamar al método PickUp. En el juego tenemos cuatro tipos de item que realizarán sus propias acciones en el método PickUp: las llaves, que guardarán el tipo de llave en la clase KeyHolder; los kits de vida, HealthPack, que aumentarán la vida del jugador; los kits de reparación, ShieldRepairKit, que aumentarán el escudo del jugador; y la munición, Munition, que aumentará el número de balas del tipo concreto asociado al item que tiene el jugador.
 
-## Integrate with your tools
+El control de los items va ligado a la funcionalidad adicional del jugador. A este objeto, le hemos añadido varias clases nuevas: KeyHolder y Health. KeyHolder se encargará tanto de guardar las llaves recogidas, mediante una lista de KeyTypes, un enum creado para definir los distintos tipos de llaves y puertas; como para saber si la puerta se tiene que abrir o no, comprobando si el tipo de puerta a la que se quiere acceder coincide con alguna de las llaves recogidas. Health, por su parte, controlará tanto la vida como el valor de escudo del jugador, teniendo una variable que define qué porcentaje de daño recibirá el escudo cuando siga activo. En la muerte del jugador, además, bloqueamos el juego.
 
-- [ ] [Set up project integrations](https://gitlab.com/lfusterco/pec-2-first-person-shooter/-/settings/integrations)
+Siguiendo con el jugador, este objeto tendrá como hijo los dos tipos de armas. Estas serán las que se encargarán de los disparos, gracias a la clase Gun. Esta se encarga de detectar cuando el jugador puede disparar y a qué dispara. Instanciará un GameObject en forma de agujero de bala en el collider contra el que choque, siempre que este no sea un enemigo. En caso de disparar al enemigo, se le aplicará una cantidad de daño definida en este mismo objeto. Además, del mismo modo que en los enemigos, se podrá definir el tiempo entre disparos y el daño que hacen para añadir variedad en funciónd el tipo de arma. Por otro lado, para controlar los cambios de arma hemos añadido un script GunHolder en el jugador, de modo que cuando se pulse la tecla E se active la siguiente arma contenida en un array y se desactive la que estaba en uso.
 
-## Collaborate with your team
+Por otro lado, tenemos varios objetos simples que se encargan de detectar al personaje, con un trigger, para realizar distintas acciones. Estos son la Lava, que herirá al jugador suficientemente para matarlo; el LevelChangeDetector, que activará un evento al que el MenuManager está escuchando y que definirá a qué nivel hay que pasar; Door, que comprobará si el jugador tiene permiso para abrir la puerta asociada a él, ya sea porque no necesita ninguna llave o porque ya se encuentra en el KeyHolder, y activará la animación de apertura o cierre de puerta; y GameWinner, que detectará cuando el jugador ha llegado al final del juego y mediante un evento avisará al GameManager de ello.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Finalmente, tenemos varios métodos para controlar los elementos de UI y mostrar la munición, la vida, el escudo y el tipo de arma en uso. Estas clases, UIMunition, UIEnemyHealth y UIBarIndicator, mediante el uso de eventos, se encargan de actualizar los datos. Además, en el centro de la pantalla mostramos un indicador de disparo cuando el arma detecta un collider contra el que chocar, dando feedback al jugador sobre cuando puede disparar y a qué punto está apuntando.
 
-## Test and Deploy
+## Problemas conocidos
+El escenario montañoso es muy amplio para la cantidad de acción que se encuentra en él.
 
-Use the built-in continuous integration in GitLab.
+En el segundo nivel, el terreno deja de tener sentido por no haber podido hacer que se vea como si el jugador estuviera bajo la lava. Esta lava, además, da problemas al ser un plano que atraviesa los pasillos del nivel.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Al cambiar de nivel, no se mantienen el número balas y la vida y el escudo del jugador.
 
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Vídeo
+Este es el [enlace]() al vídeo de la PEC.
