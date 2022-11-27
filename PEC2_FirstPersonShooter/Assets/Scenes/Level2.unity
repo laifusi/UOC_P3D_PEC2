@@ -2283,6 +2283,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
+      objectReference: {fileID: 0}
     - target: {fileID: 4279092869303238007, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.62
@@ -2466,6 +2470,10 @@ PrefabInstance:
     - target: {fileID: 2787448510554116088, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
       objectReference: {fileID: 0}
     - target: {fileID: 4721907172651580340, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_RootOrder
@@ -2722,6 +2730,10 @@ PrefabInstance:
     - target: {fileID: 2787448510554116088, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
       objectReference: {fileID: 0}
     - target: {fileID: 4721907172651580340, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_RootOrder
@@ -3772,6 +3784,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
+      objectReference: {fileID: 0}
     - target: {fileID: 4721907172651580340, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -4510,6 +4526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
+      objectReference: {fileID: 0}
     - target: {fileID: 4279092869303238007, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.99
@@ -5176,6 +5196,10 @@ PrefabInstance:
     - target: {fileID: 2787448510554116088, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
       objectReference: {fileID: 0}
     - target: {fileID: 4279092869303238007, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7706,6 +7730,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
+      objectReference: {fileID: 0}
     - target: {fileID: 4721907172651580340, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -8140,6 +8168,10 @@ PrefabInstance:
     - target: {fileID: 2787448510554116088, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
       objectReference: {fileID: 0}
     - target: {fileID: 4279092869303238007, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9103,6 +9135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
+      objectReference: {fileID: 0}
     - target: {fileID: 4721907172651580340, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -9596,6 +9632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
+      objectReference: {fileID: 0}
     - target: {fileID: 4721907172651580340, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -10023,6 +10063,10 @@ PrefabInstance:
     - target: {fileID: 2787448510554116088, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
       objectReference: {fileID: 0}
     - target: {fileID: 4721907172651580340, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_RootOrder
@@ -10470,6 +10514,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PatrollerEnemyWrapper (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
+      objectReference: {fileID: 0}
     - target: {fileID: 4279092869303238007, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.2
@@ -10675,6 +10723,10 @@ PrefabInstance:
     - target: {fileID: 2787448510554116088, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_Name
       value: PatrollerEnemyWrapper
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160008084266885583, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
+      propertyPath: m_Radius
+      value: 6.89
       objectReference: {fileID: 0}
     - target: {fileID: 4721907172651580340, guid: 4e7ad6d20740eba409949bd7a20cff88, type: 3}
       propertyPath: m_RootOrder
