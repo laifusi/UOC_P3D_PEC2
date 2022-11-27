@@ -40,4 +40,4 @@ Las plataformas móviles no tienen control de si el jugador está sobre ellos o 
 Los items que pueden caer del enemigo a veces fallan en la detección del jugador al intentar cogerlos.
 
 ## Vídeo
-Este es el [enlace]() al vídeo de la PEC.
+Este es el [enlace](https://youtu.be/NsWpYmAoHqc) al vídeo de la PEC.
